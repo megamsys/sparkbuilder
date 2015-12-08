@@ -1,14 +1,18 @@
 package io.megam.gradle
 
+import scalaz._
+import Scalaz._
+import scalaz.Validation.FlatMap._
+
 /**
  * Abstraction which exposes a buildmanager.
  */
 trait BuildManager {
 
-  def build: Unit
+  /* build by running gradle assemble */
+  def build: ValidationNel[Throwable, YonpiRaw]
 
-  /** Can be used to clean an compiler's internal state. */
-  def clean: Unit
+  /** cleans a yonpi gradle driven project  */
+  def clean: ValidationNel[Throwable, YonpiRaw]
 
-  def hasErrors: Boolean
 }
