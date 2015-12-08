@@ -15,7 +15,7 @@ Two ways, sbt or gradle.
 
 resolvers += "Bintray megamsys" at "https://dl.bintray.com/megamsys/scala/"
 
-libraryDependencies ++= Seq("io.megam" %% "sparkbuilder" % "0.12")
+libraryDependencies ++= Seq("io.megam" %% "sparkbuilder" % "0.4")
 
 ```
 
@@ -30,7 +30,7 @@ libraryDependencies ++= Seq("io.megam" %% "sparkbuilder" % "0.12")
     }
 
     dependencies {
-      compile 'io.megam:libcommon_2.11:0.20'
+      compile 'io.megam:sparkbuilder_2.11:0.4'
    }
 
 ```
