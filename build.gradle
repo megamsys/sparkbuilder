@@ -1,0 +1,74 @@
+apply plugin: 'scala'
+
+buildscript {
+
+  repositories {
+      maven {
+        url "https://plugins.gradle.org/m2/"
+      }
+
+    
+      dependencies {
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5"
+      }
+   }
+}
+
+repositories {
+    maven {
+      url 'https://repo.gradle.org/gradle/libs-releases-local'
+    }
+
+    maven {
+      url 'http://dl.bintray.com/megamsys/scala'
+    }
+
+    mavenCentral()
+    jcenter()
+
+
+ }
+
+   dependencies {
+    compile 'org.scala-lang:scala-library:2.11.7'
+    }
+
+    def toolingApiVersion = gradle.gradleVersion
+
+    dependencies {
+      compile "org.gradle:gradle-tooling-api:${toolingApiVersion}"
+      compile 'io.megam:libcommon_2.11:0.20'
+      compile 'org.scalaz:scalaz-core_2.11:7.1.5'
+      testCompile 'junit:junit:4.5'
+      testCompile 'org.specs2:specs2-core_2.11:3.6.5-20151112214348-18646b2'
+      testCompile 'org.specs2:specs2-junit_2.11:3.6.5-20151112214348-18646b2'
+      testCompile 'org.specs2:specs2-matcher-extra_2.11:3.6.5-20151112214348-18646b2'
+      runtime 'org.slf4j:slf4j-simple:1.7.10'
+    }
+
+
+
+apply plugin: 'com.jfrog.bintray'
+
+ext.bintray = new Properties()
+bintray.load(new FileInputStream("$System.env.HOME" + "/.bintray/.credentials"))
+
+bintray {
+	user = bintray.hasProperty('user') ? bintray['user'] : System.getenv('BINTRAY_USER')
+	key = bintray.hasProperty('password') ? bintray['password'] : System.getenv('BINTRAY_API_KEY')
+
+	pkg {
+		repo = 'maven'
+		name = 'sparkbuilder'
+		desc = 'Automated spark yonpijar builder using gradle tooling'
+		licenses = ['Apache-2.0']
+		vcsUrl = 'https://github.com/megamsys/sparkbuilder.git'
+		labels = ['spark', 'builder', 'gradle', 'spark']
+		publicDownloadNumbers = true
+		version {
+			name = '0.1'
+			desc = 'Automated spark yonpijar builder using gradle tool for any git repo'
+			attributes = ['spark-plugin': 'io.megam.gradle']
+		}
+	}
+}
