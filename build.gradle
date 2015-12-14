@@ -25,7 +25,7 @@ publishing {
 			from components.java
 			groupId 'io.megam'
   		artifactId 'sparkbuilder_2.11'
-  		version '0.5'
+  		version '0.6'
       artifact sourceJar
 		}
 	}
@@ -54,9 +54,8 @@ repositories {
 
     dependencies {
       compile "org.gradle:gradle-tooling-api:${toolingApiVersion}"
-      compile 'io.megam:libcommon_2.11:0.20'
+      compile 'io.megam:libcommon_2.11:0.21'
       compile 'org.scalaz:scalaz-core_2.11:7.1.5'
-      compile 'commons-io:commons-io:2.4'
       testCompile 'junit:junit:4.5'
       testCompile 'org.specs2:specs2-core_2.11:3.6.5-20151112214348-18646b2'
       testCompile 'org.specs2:specs2-junit_2.11:3.6.5-20151112214348-18646b2'

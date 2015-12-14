@@ -4,17 +4,14 @@ import scalaz._
 import Scalaz._
 import scalaz.Validation.FlatMap._
 import org.megam.common.git.GitRepo
-import org.apache.commons.io.FileUtils
 
 case class YonpiRaw(git: GitRepo) {
 
   val name = git.name.repo
 
-  FileUtils.forceMkdir(new java.io.File(git.local))
-
   val root = new java.io.File(git.local)
 
-  val jar = new java.io.File(root.getAbsolutePath + java.io.File.separator + "build" + java.io.File.separator + "libs" + java.io.File.separator + name + ".jar")
+  val jar = new java.io.File(local + java.io.File.separator + "build" + java.io.File.separator + "libs" + java.io.File.separator + name + ".jar")
 
   def exists = jar.exists.successNel[Throwable]
 
