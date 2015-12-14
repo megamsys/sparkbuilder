@@ -29,33 +29,36 @@ class YonpiRawSpec extends Specification {
 
   case object Yonpi {
     def succeeds: SpecsResult = {
-      val yp = YonpiProject(new GitRepo("local", "https://github.com/megamsys/sparkbuilder.git"))
-      yp.name0 must beEqualTo("sparkbuilder")
-      yp.root0 must beEqualTo(new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/sparkbuilder"))
-      yp.jar0 must beEqualTo(new java.io.File(yp.root0.getAbsolutePath + "/build/libs/" + yp.name0 + ".jar"))
+      val root = new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/testsparkbb")
+      val yp = YonpiProject(new GitRepo(root.getAbsolutePath, "https://github.com/megamsys/testsparkbb.git"))
+      yp.name0 must beEqualTo("testsparkbb")
+      yp.root0.getAbsolutePath must beEqualTo(root.getAbsolutePath)
+      yp.jar0.getAbsolutePath must beEqualTo(yp.root0.getAbsolutePath + "/build/libs/" + yp.name0 + ".jar")
     }
   }
 
+
   case object YonpiGradle {
     def succeeds: SpecsResult = {
-      val yp = YonpiProject(new GitRepo(
-        new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/sparkbuilder").getAbsolutePath, "https://github.com/megamsys/sparkbuilder.git"))
+      val root = new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/testsparkbb")
+      val yp = YonpiProject(new GitRepo(root.getAbsolutePath, "https://github.com/megamsys/testsparkbb.git"))
       yp.buildJar().toOption.get must haveClass[io.megam.gradle.YonpiRaw]
     }
   }
 
   case object YonpiCleanGradle {
     def succeeds: SpecsResult = {
+      val root= new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/testsparkbb")
       val yp = YonpiProject(new GitRepo(
-        new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/sparkbuilder").getAbsolutePath, "https://github.com/megamsys/sparkbuilder.git"))
+        root.getAbsolutePath, "https://github.com/megamsys/testsparkbb.git"))
       yp.clean().toOption must beSome
     }
   }
 
   case object YonpiCleanBuildGradle {
     def succeeds: SpecsResult = {
-      val yp = YonpiProject(new GitRepo(
-        new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/sparkbuilder").getAbsolutePath, "https://github.com/megamsys/sparkbuilder.git"))
+      val root= new java.io.File(sys.env("MEGAM_HOME") + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis/testsparkbb")
+      val yp = YonpiProject(new GitRepo(root.getAbsolutePath, "https://github.com/megamsys/sparkbuilder.git"))
       yp.buildJar(true).toOption.get must haveClass[io.megam.gradle.YonpiRaw]
     }
   }

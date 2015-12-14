@@ -5,7 +5,7 @@ Sparkbuilder for "[Megam cloud platform](https://www.megam.io)". The Sparkbuilde
 
 We don't spin process, but natively integrate to Gradle using its tooling API.
 
-## How can use this ?
+## How can you use this ?
 
 Two ways, sbt or gradle.
 
