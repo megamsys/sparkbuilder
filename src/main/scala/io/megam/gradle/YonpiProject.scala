@@ -10,11 +10,9 @@ case class YonpiRaw(git: GitRepo) {
 
   val name = git.name.repo
 
-  val MEGAM_HOME = (sys.env.get("MEGAM_HOME") map { x => x + java.io.File.separator + "megamgateway" + java.io.File.separator + "yonpis" }).getOrElse("/var/lib/megam/megamgateway/yonpis")
+  FileUtils.forceMkdir(new java.io.File(git.local))
 
-  FileUtils.forceMkdir(new java.io.File(MEGAM_HOME))
-
-  val root = new java.io.File(MEGAM_HOME + java.io.File.separator + name)
+  val root = new java.io.File(git.local)
 
   val jar = new java.io.File(root.getAbsolutePath + java.io.File.separator + "build" + java.io.File.separator + "libs" + java.io.File.separator + name + ".jar")
 
